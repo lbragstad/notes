@@ -177,7 +177,7 @@ Table of Contents
 > * you made a comment on patch set 2
 > * the author addressed your comment in patch set 3
 > * tons of things change between patch set 3 and 45 and your comment from
->   patch set 2 is no long valid or goes regresses on accident
+>   patch set 2 is no long valid or regresses on accident
 > * patch merges
 >
 > We can prevent that from happening by reviewing previous comments.
