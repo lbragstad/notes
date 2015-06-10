@@ -89,7 +89,8 @@ This is just a base line of some things to look for when doing code reviews.
 
 ### Documentation
 
-* Does the change require a change to end-user (deployer/operator) docs?
+* Does the change require additional end-user (deployer/operator)
+  documentation?
 
 > If so, check to see if there is a patch proposed to add docs for it. If not,
 > then one should be proposed to accurately document what is changing and how
@@ -112,7 +113,8 @@ This is just a base line of some things to look for when doing code reviews.
 
 > If you've read a piece of code several times and you still don't understand
 > exactly what it's doing, it could probably benefit from an inline comment.
-> If you do understand what is being done, not every other reviewer might.
+> Even if you do understand what is being done, it might not be clear to every
+> other reviewer.
 
 ### Don't Repeat Yourself (DRY)
 
