@@ -171,7 +171,7 @@ This is just a base line of some things to look for when doing code reviews.
 
 * Does the patch require additional testing added to Tempest?
 
-> If we are delivering something that effects how other services interact with
+> If we are delivering something that affects how other services interact with
 > Keystone, chances are we might need a Tempest test to enforce that behavior.
 > An example of this would be Tempests tests and validate operations used with
 > Keystone trusts. When in doubt, drop into the `#openstack-qa` channel on
