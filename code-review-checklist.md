@@ -143,8 +143,8 @@ Table of Contents
 >    pass
 >```
 > your Spidey senses should be going off. We should make sure we deal with
-> exceptions if we are catching them. If there is nothing to deal with, then
-> are we logging anything? If there is nothing to log, then is there a comment
+> exceptions if we catch them. If there is nothing to deal with, then are we
+> logging anything? If there is nothing to log, then is there a comment
 > explaining why?
 
 ### Migrations
