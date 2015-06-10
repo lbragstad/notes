@@ -2,17 +2,17 @@
 
 This is just a base line of some things to look for when doing code reviews.
 
-* [Table of Contents](#table-of-contents)
-    * [Backwards Compatibility](#backwards-compatibility)
-    * [Coding Conventions](#coding-conventions)
-    * [Commit Messages](#commit-messages)
-    * [Copyright](#copyright)
-    * [Documentation](#documentation)
-    * [Don't Repeat Yourself (DRY)](#dont-repeat-yourself-dry)
-    * [Migrations](#migrations)
-    * [Patch Size &amp; Structure](#patch-size--structure)
-    * [Style](#style)
-    * [Testing Coverage](#testing-coverage)
+Table of Contents
+  * [Backwards Compatibility](#backwards-compatibility)
+  * [Coding Conventions](#coding-conventions)
+  * [Commit Messages](#commit-messages)
+  * [Copyright](#copyright)
+  * [Documentation](#documentation)
+  * [Don't Repeat Yourself (DRY)](#dont-repeat-yourself-dry)
+  * [Migrations](#migrations)
+  * [Patch Size &amp; Structure](#patch-size--structure)
+  * [Style](#style)
+  * [Testing Coverage](#testing-coverage)
 
 ### Backwards Compatibility
 
