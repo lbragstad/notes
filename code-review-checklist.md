@@ -217,7 +217,7 @@ Table of Contents
 > Keystone trusts. When in doubt, drop into the `#openstack-qa` channel on
 > Freenode and ask the Tempest folks.
 
-* Do the tests added have add complex setup?
+* Do the tests added add unnecessary complex setup?
 
 > With large projects that move fast, the testing footprint grows a lot. It
 > becomes very easy for tests to get added with niche setup procedures. If a
