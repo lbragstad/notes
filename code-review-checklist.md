@@ -22,19 +22,19 @@ This is just a base line of some things to look for when doing code reviews.
 
 * Does the change break backwards compatibility with an internal API?
 
-> We should make sure that if a common piece of project code has an API change,
-> subsequent patches to update code that uses that API should be proposed. An
-> example might be if we changed the `keystone.notification` API, thus changing
-> how notifications are sent. This would require several patches to other
-> Keystone APIs to consume the change.
+> If a common piece of project code has an API change, subsequent patches to
+> update the code that uses that API should be proposed. An example might be if
+> we changed the `keystone.notification` API, thus changing how notifications
+> are sent. This would require several patches to other Keystone APIs to
+> consume the change.
 
 ### Coding Conventions
 
-* Does the patch follow general project coding conventions?
+* Does the patch follow the project's coding conventions?
 
-> Each open source project has it's own conventions. These often vary between
-> OpenStack project even. After enough exposure to a project's source, these
-> conventions are recognizable.
+> Each open source project has its own coding conventions. These often vary
+> between OpenStack projects. After enough exposure to a project's source,
+> these conventions are recognizable.
 
 * Does the patch follow OpenStack coding conventions?
 
@@ -54,10 +54,9 @@ This is just a base line of some things to look for when doing code reviews.
 
 * If the patch is fixing a bug, does it link to a bug?
 
-> Bug links can be found in the footer of the commit message. Reviewing the
-> linked bug both before reviewing the patch, and after, is a good way to gain
-> additional context around what the author is trying to accomplish and ensure
-> the patch addresses the issue documented in the bug report.
+> Bug links can be found in the footer of the commit message. Carefully reading
+> the linked bug report before reviewing the patch, and after, is a good way to
+> gain additional context around what the author is proposing.
 
 * If the patch is delivering a feature, does it link to a spec or blueprint?
 
@@ -81,31 +80,28 @@ This is just a base line of some things to look for when doing code reviews.
 
 * Does the patch add an OpenStack Foundation copyright?
 
-> If so, that can be bad. Only members of the OpenStack Foundation can add
-> OpenStack copyrights. Company copyrights should be fine and it's on that
-> company to maintain their copyrights, especially if they ship products with
-> that code. [Copyright
+> Only members of the OpenStack Foundation can add OpenStack copyrights.
+> Company copyrights should be fine and it's usually on that company to
+> maintain their copyrights. [Copyright
 > Guidelines](https://wiki.openstack.org/wiki/Documentation/Copyright) can
-> change at the discretion of the OpenStack Foundation, but it's useful to stay
-> up on them.
+> change at the discretion of the OpenStack Foundation, but it's useful to
+> review them regularly.
 
 ### Documentation
 
 * Does the change require a change to end-user (deployer/operator) docs?
 
-> If so, check to see if there is a patch that's been proposed to add it. If
-> not, then we should be sure to accurately document what is change and how to
-> deal with it.
+> If so, check to see if there is a patch proposed to add docs for it. If not,
+> then one should be proposed to accurately document what is changing and how
+> to deal with it.
 
 * Does the change require an update to developer documentation?
 
-> Developers need documentation too! This can apply to patches that change tool
-> chains, testing automation, development tools, etc. It's harder to be an
-> effective contributor when the documentation you're using to on-board is
-> out-of-date. We can help mitigate this by ensuring changes to tooling include
-> developer documentation.
+> Developers need documentation too! This can apply to patches that change
+> developer tools, testing automation, etc. It's harder to be an effective
+> contributor when the documentation you're using to on-board is out-of-date.
 
-* If the change includes a public API, are those methods doc string'd?
+* If the change includes a public API, does it have doc string'd?
 
 > Capturing sound information like variable types, purpose, and expected
 > behavior in documentation strings is extremely helpful. It helps reviewers
@@ -114,11 +110,9 @@ This is just a base line of some things to look for when doing code reviews.
 
 * Is there any confusing logic that would benefit from an inline comment?
 
-> If you've read a piece of code several times and still don't understand
-> exactly what it's doing, it could probably benefit from an inline comment
-> from the author. If you do understand what is being done, not every other
-> reviewer might. Maybe we can use the opportunity to simplify the code into
-> something that is more readable.
+> If you've read a piece of code several times and you still don't understand
+> exactly what it's doing, it could probably benefit from an inline comment.
+> If you do understand what is being done, not every other reviewer might.
 
 ### Don't Repeat Yourself (DRY)
 
@@ -126,18 +120,21 @@ This is just a base line of some things to look for when doing code reviews.
   project?
 
 > Duplicate code can be a maintainability nightmare. Let's consolidate and
-> share where we can. Maybe the author doesn't know there is a module that does
-> exactly what they need. If they do, they might have a good reason for not
-> going with that implementation. Does it make sense to find a way to use the
-> same code. Who else would be interested in sharing that code?
+> share where we can. Maybe the author doesn't know there is another module
+> that does exactly what they need. If they do, they might have a good reason
+> for not going with that implementation. Does it make sense to find a way to
+> use the same code. Who else would be interested in sharing that code? Is this
+> something that would benefit other OpenStack project? What about other
+> open-source project?
 
 ### Migrations
 
 * Does the patch need a migration of any kind?
 
-> If so, how painful will it be for ops? Can it be improved? We can provider
-> migration Advil in multiple ways, like tooling and documentation. Proactively
-> documenting a migration change will result in less bugs opened later!
+> If so, how painful will it be for ops? Can it be improved? As developers, we
+> can provider migration-Advil in multiple ways, like tooling and
+> documentation. Proactively documenting a migration impact will result in less
+> bugs opened later!
 
 ### Patch Size & Structure
 
@@ -159,16 +156,16 @@ This is just a base line of some things to look for when doing code reviews.
 
 > If the patch consists of code, we should ensure that it is tested.
 
-* Do the tests actually test new code that's being added?
+* Do the tests actually test the code that's being added?
 
 > Don't forget to test the tests! If you pull the patch down locally, can you
 > make the tests fail? If you revert the change locally and run the tests, do
-> they still pass? If so, then the tests probably need some more work.
+> they still pass? If so, then the tests probably need some love.
 
 * Does the patch introduce test coverage regression?
 
 > Coverage can be checked by running `tox -e cover`. The coverage report can
-> then be inspected locally by running `open keystone/index.html`.
+> then be inspected locally (`open keystone/index.html`).
 
 * Does the patch require additional testing added to Tempest?
 
@@ -176,13 +173,12 @@ This is just a base line of some things to look for when doing code reviews.
 > Keystone, chances are we might need a Tempest test to enforce that behavior.
 > An example of this would be Tempests tests and validate operations used with
 > Keystone trusts. When in doubt, drop into the `#openstack-qa` channel on
-> Freenode and ask the Tempest folks.  Most of these questions can be answered
-> by checking out the change locally with `git review -d <patch-number>` and
-> inspecting coverage reports.
+> Freenode and ask the Tempest folks.
 
 * Do the tests added have add complex setup?
 
 > With large projects that move fast, the testing footprint grows a lot. It
 > becomes very easy for tests to get added with niche setup procedures. If a
 > patch has specific setup methods for tests, can they be consolidated into
-> something that already does that setup?
+> something that already does that setup? Can the setup logic be pulled out
+> into a testing mixin and shared?
