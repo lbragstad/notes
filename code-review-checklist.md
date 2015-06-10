@@ -9,6 +9,7 @@ Table of Contents
   * [Copyright](#copyright)
   * [Documentation](#documentation)
   * [Don't Repeat Yourself (DRY)](#dont-repeat-yourself-dry)
+  * [Exceptions](#exceptions)
   * [Migrations](#migrations)
   * [Patch Size &amp; Structure](#patch-size--structure)
   * [Style](#style)
@@ -128,6 +129,23 @@ Table of Contents
 > use the same code. Who else would be interested in sharing that code? Is this
 > something that would benefit other OpenStack project? What about other
 > open-source project?
+
+### Exceptions
+
+* Are exceptions handled properly?
+
+> If the patch excepts exceptions, are they handed properly? If you see
+> something like
+>```
+>try:
+>    # something
+>except Exception:
+>    pass
+>```
+> your Spidey senses should be going off. We should make sure we are dealing
+> with exception if we are catching them. If there is nothing to deal with,
+> then are we logging anything? If there is nothing to log, then is there a
+> comment explaining why?
 
 ### Migrations
 
