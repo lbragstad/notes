@@ -169,14 +169,17 @@ Table of Contents
 
 * Have you commented on this patch before and where your comments answered?
 
-> It's good to go back and see what caught your eye previously. It's also
-> important to make sure the point being made maintains integrity through the
-> review. An example being:
+> It's good to go back and see what caught your eye previously. Maybe the
+> author, or another reviewer, responded to your comment. It's also important
+> to make sure the point being raised maintains integrity throughout the review
+> cycle. An example being:
+>
 > * you made a comment on patch set 2
 > * the author addressed your comment in patch set 3
 > * tons of things change between patch set 3 and 45 and your comment from
 >   patch set 2 is no long valid or goes regresses on accident
 > * patch merges
+>
 > We can prevent that from happening by reviewing previous comments.
 
 * What have other reviewers commented on?
