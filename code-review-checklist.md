@@ -12,6 +12,7 @@ Table of Contents
   * [Exceptions](#exceptions)
   * [Migrations](#migrations)
   * [Patch Size &amp; Structure](#patch-size--structure)
+  * [Reviewing Previous Comments](#reviewing-previous-comments)
   * [Style](#style)
   * [Testing Coverage](#testing-coverage)
 
@@ -163,6 +164,24 @@ Table of Contents
 > Does this patch feel far too complicated to review all at once? Should it be
 > broken down into a series of patches? Breaking a monolithic patch into
 > several bite-sized patches makes them more reviewable.
+
+### Reviewing Previous Comments
+
+* Have you commented on this patch before and where your comments answered?
+
+> It's good to go back and see what caught your eye previously. It's also
+> important to make sure the point being made maintains integrity through the
+> review. An example being:
+> * you made a comment on patch set 2
+> * the author addressed your comment in patch set 3
+> * tons of things change between patch set 3 and 45 and your comment from
+>   patch set 2 is no long valid or goes regresses on accident
+> * patch merges
+> We can prevent that from happening by reviewing previous comments.
+
+* What have other reviewers commented on?
+
+> This is a great way to learn new tips and tricks from other developers!
 
 ### Style
 
