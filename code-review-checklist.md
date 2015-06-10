@@ -167,7 +167,7 @@ This is just a base line of some things to look for when doing code reviews.
 * Does the patch introduce test coverage regression?
 
 > Coverage can be checked by running `tox -e cover`. The coverage report can
-> then be inspected locally (`open keystone/index.html`).
+> then be inspected locally (`open keystone/cover/index.html`).
 
 * Does the patch require additional testing added to Tempest?
 
