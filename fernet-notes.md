@@ -42,6 +42,33 @@ You could build your key distribution into your deployment's exisiting
 configuration management system. In all reality, something as simple as `rsync`
 is a viable option.
 
+Since key rotation is a single operation, it's easiest to do this on a single
+node and verify the rotation took place properly. The fact that you have a
+staged key allows you the ability to verify the rotation before syncing state
+to the other nodes. Key distribution should be something that runs until it
+succeeds. If key distribution does succeed and you run a subsequent
+distribution, it shouldn't have any ramifications. The following operations
+should help illustrate:
+
+```
+Pick a keystone node in the current mesh
+Rotate Fernet keys
+  - Did it fail?
+    - If yes, investigate issues with that particular box. Fernet tokens are
+      small and the operation for adding a new key, promoting the staged key,
+      and demoting the current primary are trivial. There shouldn't be much
+      room for error in this operation.
+    - If no, the key rotation happened successfully. You should be good to
+      distribute the new key set.
+Distribute the new key repository
+  - Did is fail?
+    - If yes, try distributing again. The nodes that have not received the
+      newest key set should still be able to validate tokens because they have
+      the old staged key, which is now the new primary key in the new key set.
+    - If no, you're good to go. You've successfully rotated a new key into the
+      mix and pushed the new key set into the mesh.
+```
+
 ### How long do you keep your keys around?
 
 Fernet tokens are only secure as long as you rotate the keys creating them.
