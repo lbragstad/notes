@@ -48,7 +48,7 @@ Fernet tokens are only secure as long as you rotate the keys creating them.
 Since the penalty of rotation is low, an operator could err on the side of
 security and rotate weekly, daily, even hourly.
 
-### So, how does a stage key help me again?
+### So, how does a staged key help me again?
 
 The staged key is special. Fernet keys have a natural life-cycle. Each key
 starts as a staged key, is promoted to be the primary key, and then demoted to
