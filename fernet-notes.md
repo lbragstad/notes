@@ -11,12 +11,10 @@ Collected throughout Thursday, October 29th, 2015
 
 ## Notes
 
-Since the landing of the `fernet` token provider in the keystone codebase, the
-Fernet implementation and use in keystone has raised plenty of questions. The
-following questions have been gathered from the OpenStack Tokyo Summit. I'd
-like to be able to consolidate these questions, and answers, into formal
-keystone documentation.
-
+Since the landing of the `fernet` token provider, the Fernet implementation,
+and use, in keystone has raised plenty of questions. The following questions
+have been gathered from the OpenStack Tokyo Summit. I'd like to be able to
+consolidate these questions, and answers, into formal keystone documentation.
 
 ### What is the recommended way to rotate and distribute keys?
 
