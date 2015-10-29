@@ -19,21 +19,23 @@ consolidate these questions, and answers, into formal keystone documentation.
 ### What is the recommended way to rotate and distribute keys?
 
 You will only need to distribute keys when you have multiple keystone nodes in
-your deployment. There is a rotation mechanism is built into `keystone-manage
+your deployment. There is a rotation mechanism built into `keystone-manage
 fernet_rotate`. This rotation mechanism does not do any sort of distribution of
 keys. The distribution of keys is best handled by configuration management.
 
-### Do you have to always run your rotation and distribution from the same
+### Do you always have to run your rotation and distribution from the same
 node?
 
 Nope, as long as all nodes sync state at least once, each node should be able
 to rotate and push keys to all other nodes in the cluster.
 
-### What do I need to do to add new keystone node to my pool of keystone nodes?
+### What do I need to do to add new keystone nodes to my deployment?
 
 Treat your keys like super secret configuration files. Before a node is allowed
-to join an existing cluster, it should sync key repository state with the rest
-of the cluster.
+to join an existing cluster, issuing and validating tokens, it should sync key
+repository state with the rest of the cluster.
+
+This is done through distribution from an existing node in the cluster.
 
 ### How should I approach key distribution?
 
@@ -66,7 +68,7 @@ being able to validate tokens created by a different node in the cluster.
 Your `key_repository` will tell keystone where to look for Fernet keys. This
 could be anywhere, really. Currently, keystone supports a file-backed
 repository. It's not to say that an interface could pull keys out of another
-storage system. Technically, this is the "fast", "cheap", or "good" argument,
+storage system. This is similar to the "fast", "cheap", or "good" argument,
 pick two!
 
 Storing your keys on disk, in `/etc/keystone/fernet_keys/` for example, has the
