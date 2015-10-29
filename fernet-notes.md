@@ -23,8 +23,7 @@ your deployment. There is a rotation mechanism built into `keystone-manage
 fernet_rotate`. This rotation mechanism does not do any sort of distribution of
 keys. The distribution of keys is best handled by configuration management.
 
-### Do you always have to run your rotation and distribution from the same
-node?
+### Must you run your rotation and distribution from the same node?
 
 Nope, as long as all nodes sync state at least once, each node should be able
 to rotate and push keys to all other nodes in the cluster.
