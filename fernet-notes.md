@@ -95,7 +95,7 @@ database:
   - requires a database connection
   - possibly slow
 
-### Do Fernet tokens still expires?
+### Do Fernet tokens still expire?
 
 Yep, Fernet tokens can expire just like keystone's other token formats.
 
