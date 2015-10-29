@@ -70,7 +70,7 @@ repository. It's not to say that an interface could pull keys out of another
 storage system. This is similar to the "fast", "cheap", or "good" argument,
 pick two!
 
-Storing your keys on disk, in `/etc/keystone/fernet_keys/` for example, has the
+Storing your keys on disk, in `/etc/keystone/fernet-keys/` for example, has the
 advantages of being fast and scalable. Each keystone nodes has its own local
 repository of Fernet keys. The downside of this approach is that it requires
 coordination when doing a rotation. But, this coordination can be orchestrated
