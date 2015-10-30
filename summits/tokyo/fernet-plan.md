@@ -95,7 +95,7 @@ consolidating test cases, etc.
 #### Continued Performance
 
 We already have some patches in place to speed up token creation and validation
-as a result of introducing Fernet. Including caching of the
+as a result of introducing Fernet. These patches include caching of the
 [catalog](https://review.openstack.org/#/c/215212/) and [role
 assignments](https://review.openstack.org/#/c/215715/). I'd like to continue
 this pattern in the future. Note that the above fixes would actually improve
