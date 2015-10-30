@@ -28,7 +28,7 @@ added in MySQL 5.7, but don't quote me. Regardless, at the time of this
 writing, we can't enforce a suitable version of MySQL to be installed in
 upstream gate tests.
 
-So, why is this a problem?
+##### So, why is this a problem?
 
 Let's say that you enter the threshold of a new second and create a Fernet
 token. The token creation of that token will be rounded down to the beginning
@@ -45,14 +45,12 @@ There are several cases like this as you mix and match different combinations
 of a revocation backend that do, or do not, support sub-second precision with
 Fernet tokens.
 
-The hack-tastic fix to get around this initially is to patch Tempest. The plus
-is that there hasn't been any operator feedback saying this is an "important"
-case. The right long term solution is to separate keystone's reliance on the
-`DATETIME` format in SQL, and the lack of sub-second precision in the Fernet
-spec.
-
-  - https://review.openstack.org/#/c/231191/
-
+The hack-tastic fix to get around this initially is to
+[patch](https://review.openstack.org/#/c/231191/) Tempest. The plus is that
+there hasn't been any operator feedback saying this is an "important" case. The
+right long term solution is to separate keystone's reliance on the `DATETIME`
+format in SQL, and address the lack of sub-second precision in the Fernet
+specification.
 
 #### Patch keystone to remove all `DATETIME` MySQL types.
 
