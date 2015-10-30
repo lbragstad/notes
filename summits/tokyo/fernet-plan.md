@@ -16,17 +16,17 @@ keystone.
 
 #### Patch Tempest to wait one second on password changes.
 
-Ok, hold up. With the introduction of fernet, we also found a special case with
-how fernet interacts with revocation events in certain environments. For
-example, when running keystone unit tests, revocation events have the ability
-to store sub-second precision because unit tests are backed by sqlite. The
-sqlite implementation allows the `DATETIME` sql format to store sub-seconds in
-the format. When playing with things using MySQL, that sub-second precision is
-lost on some versions of MySQL. I believe subsecond
+Ok, just hold up before you go grabbin' your pitchfork. With the introduction
+of Fernet, we also found a special case with how Fernet interacts with
+revocation events in certain environments. For example, when running keystone
+unit tests, revocation events have the ability to store sub-second precision
+because unit tests are backed by sqlite. The sqlite implementation allows the
+`DATETIME` to store sub-seconds. When playing with things using MySQL, that
+sub-second precision is lost on some versions of sql. I believe subsecond
 [support](http://dev.mysql.com/doc/refman/5.7/en/fractional-seconds.html) was
-added in MySQL 5.7, but don't quote me. Regardless, at the time of this
-writing, we can't enforce a suitable version of MySQL to be installed in
-upstream gate tests.
+added sometime after MySQL 5.5, but don't quote me. Regardless, at the time of
+this writing, we can't enforce the installation of a version of MySQL that
+supports sub-second precision in upstream gate tests.
 
 ##### So, why is this a problem?
 
@@ -35,14 +35,14 @@ token. The token creation of that token will be rounded down to the beginning
 of that second. Now, let's change our password in that same second. The
 revocation event's `issued_at` time will be truncated once it enters the data
 layer. If we go get a new token, still within that same second, we will have
-two tokens and a revocation event, all created at the same at time. This is all
-due to truncation. When we attempt to validate our latest token it will have
-the same creation time as the `issued_at` time of the revocation event,
+two tokens and a revocation event, all created at the same at time, all as a
+side-effect of truncation. When we attempt to validate our latest token it will
+have the same creation time as the `issued_at` time of the revocation event,
 resulting in a 404 or 401, despite the fact that it was actually created after
 the password was changed.
 
 There are several cases like this as you mix and match different combinations
-of a revocation backend that do, or do not, support sub-second precision with
+of revocation backends that do, or do not, support sub-second precision with
 Fernet tokens. We've documented some of these cases in keystone [unit
 tests](https://review.openstack.org/#/c/227995/).
 
@@ -55,13 +55,12 @@ specification.
 
 #### Patch keystone to remove all `DATETIME` MySQL types.
 
-Since there is such inconsistency in various `DATETIME` formats within SQL, why
-not remove it and replace it with some else? One way we could do this would be
-to replace `DATETIME` with `INT` and store timestamps instead. This would allow
-us to get sub-second precision.
-
-This would require a database migration as well as a layer that translates
-timestamps to the time strings that keystone expects.
+Since there is such inconsistency in various `DATETIME` formats within SQL
+implementations, why not remove it and replace it with some else? One way we
+could do this would be to replace `DATETIME` with `INT` and store timestamps
+instead. This would allow us to get sub-second precision.  This would require a
+database migration as well as a layer that translates timestamps to the time
+strings that keystone expects.
 
 #### Add sub-second precision to Fernet tokens.
 
