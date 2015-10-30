@@ -43,7 +43,8 @@ the password was changed.
 
 There are several cases like this as you mix and match different combinations
 of a revocation backend that do, or do not, support sub-second precision with
-Fernet tokens.
+Fernet tokens. We've documented some of these cases in keystone [unit
+tests](https://review.openstack.org/#/c/227995/).
 
 The hack-tastic fix to get around this initially is to
 [patch](https://review.openstack.org/#/c/231191/) Tempest. The plus is that
@@ -65,10 +66,11 @@ timestamps to the time strings that keystone expects.
 #### Add sub-second precision to Fernet tokens.
 
 Now we approach the second part of the problem, and add sub-second precision to
-Fernet. Since keystone doesn't actually control the Fernet specification, we'd
-have to do all this upstream. This would require changing the Fernet
-specification as well as bumping the version of `cryptography` required by
-keystone after the implementation is delivered.
+Fernet. Since keystone doesn't actually control the [Fernet
+specification](https://github.com/fernet/spec/blob/master/Spec.md), we'd have
+to do all this upstream. This would require changing the Fernet specification
+as well as bumping the version of `cryptography` required by keystone after the
+implementation is delivered.
 
 We could also look into carrying the microseconds somewhere in the Fernet
 payload. This would be a hacky fix, but it would work until we can actually get
@@ -80,3 +82,21 @@ Since we have a data layer that understands things in sub-second format and
 tokens that contain sub-second precision, we should be able to run the use case
 above in less than a second. So, remove the `time.sleep(1)` from the Tempest
 tests!
+
+### What's next?
+
+#### Code Removal
+
+We have Fernet as the default token provider. Now we can deprecate the PKI and
+PKIZ token providers, possibly the UUID provider if we're feeling spicy. This
+would be cool because we would be on the path to removing a ton of code,
+consolidating test cases, etc.
+
+#### Continued Performance
+
+We already have some patches in place to speed up token creation and validation
+as a result of introducing Fernet. Including caching of the
+[catalog](https://review.openstack.org/#/c/215212/) and [role
+assignments](https://review.openstack.org/#/c/215715/). I'd like to continue
+this pattern in the future. Note that the above fixes would actually improve
+performance outside of the Fernet-specific cases.
