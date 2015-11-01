@@ -98,7 +98,7 @@ storage system. This is similar to the "fast", "cheap", or "good" argument,
 pick two!
 
 Storing your keys on disk, in `/etc/keystone/fernet-keys/` for example, has the
-advantages of being fast and scalable. Each keystone nodes has its own local
+advantages of being fast and scalable. Each keystone node has its own local
 repository of Fernet keys. The downside of this approach is that it requires
 coordination when doing a rotation. But, this coordination can be orchestrated
 using configuration management like `ansible`, `puppet`, `chef`, etc. Also, the
@@ -106,9 +106,9 @@ timing between key rotation and distribution doesn't require tight coupling
 because of the usage of a staged key.
 
 file-backed:
-  + fast
-  + scalable
-  - requires coordination
+  + fast (+)
+  + scalable (+)
+  + requires coordination (-)
 
 Storing keys in a database and passing a connection string as the
 `key_repository` location has the ability to mitigate the pain of distribution.
@@ -118,9 +118,9 @@ retrieving keys can be subject to database latency. It is also requires a
 database connection.
 
 database:
-  + handles distribution
-  - requires a database connection
-  - possibly slow
+  + distribution can be handled auto-magically (+)
+  + requires a database connection (-)
+  + possibly slow (-)
 
 ### Do Fernet tokens still expire?
 
