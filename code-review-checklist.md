@@ -75,8 +75,7 @@ Table of Contents
 > you've read it several times, it probably needs to be revisited. The "no
 > question is dumb" rule applies here because if you're having a hard time
 > understand it, chances are someone else is too! Commit messages should be
-> detailed enough to describe **why** we should be accepting the proposed
-> change.
+> detailed enough to describe **why** we should accept the proposed change.
 
 ### Copyright
 
@@ -98,18 +97,23 @@ Table of Contents
 > then one should be proposed to accurately document what is changing and how
 > to deal with it.
 
+* Does the change require a mandatory upgrade step?
+
+> If so, we need to clearly document that in a release note.
+
 * Does the change require an update to developer documentation?
 
 > Developers need documentation too! This can apply to patches that change
 > developer tools, testing automation, etc. It's harder to be an effective
 > contributor when the documentation you're using to on-board is out-of-date.
 
-* If the change includes a public API, does it have doc string'd?
+* Are new public APIs documented?
 
 > Capturing sound information like variable types, purpose, and expected
 > behavior in documentation strings is extremely helpful. It helps reviewers
 > understand the intent of the code being proposed and it helps with
-> maintainability as the code-base changes.
+> maintainability as the code-base changes. If the change impacts the API
+> reference, a patch should be proposed to the `api-ref` as well.
 
 * Is there any confusing logic that would benefit from an inline comment?
 
@@ -128,8 +132,8 @@ Table of Contents
 > that does exactly what they need. If they do, they might have a good reason
 > for not going with that implementation. Does it make sense to find a way to
 > use the same code. Who else would be interested in sharing that code? Is this
-> something that would benefit other OpenStack project? What about other
-> open-source project?
+> something that would benefit other OpenStack projects? What about other
+> open-source projects?
 
 ### Exceptions
 
@@ -152,22 +156,25 @@ Table of Contents
 
 * Does the patch need a migration of any kind?
 
-> If so, how painful will it be for ops? Can it be improved? As developers, we
-> can provider migration-Advil in multiple ways, like tooling and
-> documentation. Proactively documenting a migration impact will result in less
-> bugs opened later!
+> If so, how painful will it be for operators? Can it be improved? Migration
+> scripts and well written documentation go a long way for operators. As the
+> developers of a feature, is there a way we can ease the migration with a
+> script or tool? Also, proactively documenting the behavior of an upgrade or
+> migration results in less bugs opened later!
 
 ### Patch Size & Structure
 
-* Is the patch greater than 500 LOC?
+* Is the patch more than 500 LOC?
 
 > Does this patch feel far too complicated to review all at once? Should it be
 > broken down into a series of patches? Breaking a monolithic patch into
-> several bite-sized patches makes them more reviewable.
+> several bite-sized patches can be a daunting task but it makes the overall
+> change much more reviewable. As you review a series of changes, you should be
+> able to see a positive progression towards the author's goal with each patch.
 
 ### Reviewing Previous Comments
 
-* Have you commented on this patch before and where your comments answered?
+* Have you commented on this patch before and were your comments addressed?
 
 > It's good to go back and see what caught your eye previously. Maybe the
 > author, or another reviewer, responded to your comment. It's also important
@@ -176,15 +183,15 @@ Table of Contents
 >
 > * you made a comment on patch set 2
 > * the author addressed your comment in patch set 3
-> * tons of things change between patch set 3 and 45 and your comment from
->   patch set 2 is no long valid or regresses on accident
+> * tons of things change between patch set 3 and patch set 45 and your comment
+>   from patch set 2 is no long valid or regresses on accident
 > * patch merges
 >
 > We can prevent that from happening by reviewing previous comments.
 
 * What have other reviewers commented on?
 
-> This is a great way to learn new tips and tricks from other developers!
+> This is a great way to knowledge share when reviewing code.
 
 ### Style
 
@@ -202,7 +209,7 @@ Table of Contents
 
 > Don't forget to test the tests! If you pull the patch down locally, can you
 > make the tests fail? If you revert the change locally and run the tests, do
-> they still pass? If so, then the tests probably need some love.
+> they still pass? If so, then the patch probably need some love.
 
 * Does the patch introduce test coverage regression?
 
@@ -217,10 +224,11 @@ Table of Contents
 > Keystone trusts. When in doubt, drop into the `#openstack-qa` channel on
 > Freenode and ask the Tempest folks.
 
-* Do the tests added add unnecessary complex setup?
+* Do the tests add unnecessary complex setup?
 
 > With large projects that move fast, the testing footprint grows a lot. It
 > becomes very easy for tests to get added with niche setup procedures. If a
 > patch has specific setup methods for tests, can they be consolidated into
 > something that already does that setup? Can the setup logic be pulled out
-> into a testing mixin and shared?
+> into a testing mixin and shared? The simpler the testing infrastructure and
+> setup is, the easier it is to refactor or find bugs later.
